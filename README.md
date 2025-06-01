@@ -1,6 +1,8 @@
 # Ocean World 🌊
 
-A 3D interactive encyclopedia of marine life, built for the browser. Swim with guppies, explore an underwater world, and enjoy a visually immersive experience.
+A 3D interactive encyclopedia of marine life, built for the browser. Swim with fish, explore an underwater world, and enjoy a visually immersive experience.
+
+🔗 **[Live Demo](https://nurg001.github.io/OceanWorldV1.io/)**
 
 ## Features
 
