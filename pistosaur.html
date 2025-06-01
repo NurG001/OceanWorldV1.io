@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>3D Aquarium - Guppy Explorer</title>
+  <title>Ocean World - an immersive 3D encyclopedia</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
@@ -556,7 +556,7 @@
     <div class="nav-container">
       <div class="nav-brand">
         <span class="icon">🌊</span>
-        Ocean Explorer
+        Ocean World
       </div>
       <nav>
         <ul class="nav-links" id="navLinks">
@@ -567,7 +567,7 @@
         </ul>
         <div class="hamburger" onclick="toggleMenu()">☰</div>
         <div class="code-signature" id="codeSignature">
-        <div class="code-icon">💻</div>
+        <div class="code-icon">IM</div>
         <div class="code-text">Code by Ismail Mahmud</div>
       </div>
       </nav>
@@ -577,7 +577,6 @@
 
   <div id="guppyBar">
     <div class="subtitle">
-      <span>🐠</span>
       Beauty of the Ocean
     </div>
     <h1>Meet the Pistosaur</h1>
@@ -595,11 +594,9 @@
     let cursorX = window.innerWidth / 2;
     let cursorY = window.innerHeight / 2;
 
-    // Initialize cursor position
     cursor.style.left = cursorX - 10 + 'px';
     cursor.style.top = cursorY - 10 + 'px';
 
-    // Smooth cursor following
     function updateCursor() {
       const speed = 0.15;
       cursorX += (mouseX - cursorX) * speed;
@@ -611,17 +608,14 @@
       requestAnimationFrame(updateCursor);
     }
 
-    // Track mouse movement
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
     });
 
-    // Add ripple effect on click
     document.addEventListener('mousedown', (e) => {
       cursor.classList.add('clicking');
       
-      // Create ripple effect
       const ripple = document.createElement('div');
       ripple.className = 'ripple';
       cursor.appendChild(ripple);
@@ -637,12 +631,10 @@
       cursor.classList.remove('clicking');
     });
 
-    // Start cursor animation after a brief delay
     setTimeout(() => {
       updateCursor();
     }, 100);
 
-    // Create floating particles
     function createParticles() {
       const container = document.getElementById('particles');
       setInterval(() => {
@@ -667,12 +659,10 @@
       document.getElementById('navLinks').classList.toggle('show');
     }
 
-    // Code signature functionality
     document.getElementById('codeSignature').addEventListener('click', function() {
       this.classList.toggle('expanded');
     });
 
-    // Start particles after a short delay
     setTimeout(createParticles, 1000);
   </script>
 
@@ -697,7 +687,6 @@
   renderer.toneMappingExposure = 1.3;
   document.body.appendChild(renderer.domElement);
 
-  // Enhanced deep-sea lighting
   const ambientLight = new THREE.AmbientLight(0x1e3a8a, 0.4);
   scene.add(ambientLight);
 
@@ -710,7 +699,6 @@
   spotLight.penumbra = 0.3;
   scene.add(spotLight);
 
-  // Additional atmospheric lighting
   const rimLight = new THREE.DirectionalLight(0x00a8ff, 0.8);
   rimLight.position.set(-5, 3, -5);
   scene.add(rimLight);
@@ -765,7 +753,6 @@
     }
   });
 
-  // Enhanced bubbles with deep-sea aesthetic
   const bubbleGeometry = new THREE.SphereGeometry(0.03, 8, 8);
   const bubbleMaterial = new THREE.MeshBasicMaterial({ 
     color: 0x40e0d0, 
@@ -800,7 +787,7 @@
   const getRandomAITarget = () => new THREE.Vector3(
     (Math.random() - 0.5) * (aquariumWidth - 2),
     (aquariumHeight / 4) + Math.random() * (aquariumHeight / 2),
-    (Math.random() - 0.5) * (aquariumDepth - 2) // allow 3D movement in Z!
+    (Math.random() - 0.5) * (aquariumDepth - 2)
   );
 
   const clock = new THREE.Clock();
@@ -824,7 +811,7 @@
     if (isMouseDown) {
       const x = mouse.x * (aquariumWidth / 2 - 0.5);
       const y = ((mouse.y + 1) / 2) * aquariumHeight;
-      const z = 0;  // You can map mouse to Z if you want, for now fixed
+      const z = 0;
       target = new THREE.Vector3(x, y, z);
       aiTarget = null;
     } else {
@@ -851,9 +838,6 @@
     nextPosition.z = THREE.MathUtils.clamp(nextPosition.z, -aquariumDepth / 2 + margin, aquariumDepth / 2 - margin);
     fish.position.copy(nextPosition);
 
-    // Rotation to face movement direction in 3D
-
-    // Extract horizontal velocity (XZ plane)
     const velocityXZ = velocity.clone();
     velocityXZ.y = 0;
     if (velocityXZ.lengthSq() > 0.0001) {
@@ -863,13 +847,11 @@
       fish.rotation.y += yawDiff * 0.15;
     }
 
-    // Pitch (tilt) and roll (bank) for natural swimming
     const tilt = -Math.atan2(velocity.y, velocity.length());
     const bank = THREE.MathUtils.clamp(-velocity.x * 0.5, -0.5, 0.5);
     fish.rotation.x += (tilt - fish.rotation.x) * 0.25;
     fish.rotation.z += (bank - fish.rotation.z) * 0.25;
 
-    // Animate bubbles
     bubbles.forEach((bubble, index) => {
       bubble.position.y += delta * (0.4 + Math.sin(elapsed + index) * 0.1);
       bubble.position.x += Math.sin(elapsed * 0.5 + index) * 0.01;
@@ -885,7 +867,6 @@
       bubble.material.opacity += (targetOpacity - bubble.material.opacity) * delta * 2;
     });
 
-    // Dynamic lighting effects
     spotLight.intensity = 1.8 + Math.sin(elapsed * 0.3) * 0.2;
     rimLight.intensity = 0.8 + Math.cos(elapsed * 0.2) * 0.1;
 
