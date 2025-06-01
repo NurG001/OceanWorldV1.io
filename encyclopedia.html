@@ -55,7 +55,6 @@
       z-index: 1;
     }
 
-    /* Custom Cursor */
     #customCursor {
       position: fixed;
       width: 20px;
@@ -85,7 +84,6 @@
       box-shadow: 0 0 10px #ffffff;
     }
 
-    /* Navbar */
     #navbar {
       position: fixed;
       top: 0;
@@ -161,7 +159,6 @@
       box-shadow: 0 0 10px var(--accent);
     }
 
-    /* Main Content */
     main {
       position: relative;
       z-index: 2;
@@ -216,7 +213,6 @@
       text-shadow: 0 0 10px var(--text-glow);
     }
 
-    /* Fish Grid */
     .fish-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -349,7 +345,7 @@
       box-shadow: 0 8px 25px rgba(64, 224, 208, 0.4);
     }
 
-    /* Floating particles effect */
+
     .particles {
       position: fixed;
       top: 0;
@@ -388,7 +384,7 @@
       }
     }
 
-    /* Search Section */
+
     .search-section {
       max-width: 600px;
       margin: 0 auto 60px;
@@ -430,7 +426,7 @@
       font-size: 18px;
     }
 
-    /* Responsive Design */
+
     @media (max-width: 768px) {
       .nav-links {
         display: none;
@@ -455,11 +451,11 @@
       }
 
       body {
-        background-attachment: scroll; /* Fixed attachment can cause issues on mobile */
+        background-attachment: scroll; 
       }
     }
 
-    /* Coming Soon Badge */
+
     .coming-soon {
       position: absolute;
       top: 15px;
@@ -486,14 +482,14 @@
 
   <header id="navbar">
     <div class="nav-container">
-      <a href="index.html" class="nav-brand">
+      <a href="ac4.html" class="nav-brand">
         <span class="icon">🌊</span>
-        Ocean World
+        Ocean Explorer
       </a>
       <nav>
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
-          <li><a href="encyclopedia.html" class="active">Encyclopedia</a></li>
+          <li><a href="#" class="active">Encyclopedia</a></li>
           <li><a href="#">Gallery</a></li>
           <li><a href="#">Contact</a></li>
         </ul>
@@ -503,11 +499,6 @@
 
   <main>
     <section class="hero-section">
-      <div class="breadcrumb">
-        <a href="index.html">Home</a>
-        <span>→</span>
-        <span>Encyclopedia</span>
-      </div>
       
       <h1 class="hero-title">Fish Encyclopedia</h1>
       <p class="hero-subtitle">Discover the fascinating world of aquatic life. Learn about different fish species, their habitats, behaviors, and unique characteristics.</p>
@@ -542,9 +533,34 @@
             <span class="stat-label">Care Level</span>
           </div>
         </div>
-        <a href="#" class="learn-more-btn">Learn More</a>
+        <a href="guppy.html" class="learn-more-btn">View Fish</a>
       </div>
 
+      <!-- Pistosaur Card -->
+<div class="fish-card" data-fish="pistosaur" onclick="openFishPage('pistosaur')">
+  <div class="coming-soon available">Available</div>
+  <span class="fish-icon">🦖</span>
+  <h3 class="fish-name">Pistosaur</h3>
+  <p class="fish-scientific">Pistosaurus longaevus</p>
+  <p class="fish-description">An ancient marine reptile from the Triassic era, known for its agile swimming and evolutionary link between land reptiles and aquatic life.</p>
+  <div class="fish-stats">
+    <div class="stat-item">
+      <span class="stat-value">2.5 m</span>
+      <span class="stat-label">Size</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">Unknown</span>
+      <span class="stat-label">Lifespan</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">Expert</span>
+      <span class="stat-label">Care Level</span>
+    </div>
+  </div>
+  <a href="pistosaur.html" class="learn-more-btn">View Fish</a>
+</div>
+
+      
       <!-- Angelfish Card -->
       <div class="fish-card" data-fish="angelfish" onclick="openFishPage('angelfish')">
         <div class="coming-soon">Coming Soon</div>
@@ -566,7 +582,7 @@
             <span class="stat-label">Care Level</span>
           </div>
         </div>
-        <a href="#" class="learn-more-btn">Learn More</a>
+        <a href="#" class="learn-more-btn">View Fish</a>
       </div>
 
       <!-- Shark Card -->
@@ -620,7 +636,7 @@
   </main>
 
   <script>
-    // Custom cursor functionality
+
     const cursor = document.getElementById('customCursor');
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
@@ -650,7 +666,6 @@
       updateCursor();
     }, 100);
 
-    // Create floating particles
     function createParticles() {
       const container = document.getElementById('particles');
       setInterval(() => {
@@ -673,7 +688,6 @@
 
     setTimeout(createParticles, 1000);
 
-    // Search functionality
     const searchInput = document.getElementById('searchInput');
     const fishCards = document.querySelectorAll('.fish-card');
 
@@ -694,22 +708,20 @@
       });
     });
 
-    // Fish page navigation
+
     function openFishPage(fishType) {
-      // Check if the fish page is available
       const card = document.querySelector(`[data-fish="${fishType}"]`);
       const isAvailable = card.querySelector('.available');
       
       if (isAvailable) {
         // For now, we'll show an alert. Later this will navigate to individual fish pages
-        alert(`Opening ${fishType} page... (This will be implemented next)`);
+        //alert(`Opening ${fishType} page... (This will be implemented next)`);
         // Future implementation: window.location.href = `fish-${fishType}.html`;
       } else {
         alert(`${fishType.charAt(0).toUpperCase() + fishType.slice(1)} page is coming soon!`);
       }
     }
 
-    // Add fade-in animation CSS
     const style = document.createElement('style');
     style.textContent = `
       @keyframes fadeIn {
@@ -719,7 +731,6 @@
     `;
     document.head.appendChild(style);
 
-    // Add smooth scroll behavior
     document.documentElement.style.scrollBehavior = 'smooth';
   </script>
 </body>
