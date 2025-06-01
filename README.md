@@ -4,6 +4,11 @@ A 3D interactive encyclopedia of marine life, built for the browser. Swim with f
 
 🔗 **[Live Demo](https://nurg001.github.io/OceanWorldV1.io/)**
 
+## UPDATED (02/06/2025)
+- Added Encyclopedia Page
+- Pistosaur, An ancient marine reptile from the Triassic era
+- Animation fixes for 3D models
+
 ## Features
 
 - 🐟 Interactive 3D aquarium (Three.js)
