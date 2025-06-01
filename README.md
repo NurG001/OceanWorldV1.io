@@ -51,9 +51,6 @@ ocean-world/
 - 📚 Educational tooltips with fish facts
 - 🎮 Add feeding & interaction mechanics
 
-## Attribution
-
-- 🐠 Guppy model licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
 ## License
 
