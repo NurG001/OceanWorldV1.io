@@ -451,12 +451,12 @@
       }
     }
 
-    /* Subtle glow effects */
+
     .glow {
       box-shadow: 0 0 20px rgba(64, 224, 208, 0.3);
     }
 
-    /* Enhanced scrollbar */
+
     ::-webkit-scrollbar {
       width: 8px;
     }
@@ -474,7 +474,7 @@
       background: rgba(64, 224, 208, 0.3);
     }
 
-    /* Custom glowing cursor */
+
     body {
       cursor: none;
     }
@@ -589,7 +589,7 @@
   </div>
   
   <script>
-    // Custom cursor functionality
+
     const cursor = document.getElementById('customCursor');
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
@@ -674,7 +674,6 @@
 
   const scene = new THREE.Scene();
   
-  // Optional background texture - uncomment if you have a background image
   const textureLoader = new THREE.TextureLoader();
   textureLoader.load('mosasaurus-bg.png', (texture) => {
     scene.background = texture;
@@ -788,7 +787,7 @@
   let cinematicAction = 'none'; // 'spiral', 'barrel_roll', 'dive', 'surface', 'circle'
   
   const getRandomAITarget = () => {
-    // Generate target in the current direction for sustained movement
+
     const distance = 3 + Math.random() * 4; // How far to swim in this direction
     
     return new THREE.Vector3(
@@ -799,29 +798,27 @@
   };
   
   const changeDirection = () => {
-    // 30% chance to enter cinematic mode
     if (Math.random() < 0.3 && !cinematicMode) {
       cinematicMode = true;
-      cinematicTimer = 3 + Math.random() * 4; // 3-7 seconds of cinematic movement
+      cinematicTimer = 3 + Math.random() * 4; 
       
-      // Chooses random cinematic action
       const actions = ['spiral', 'barrel_roll', 'dive', 'surface', 'circle'];
       cinematicAction = actions[Math.floor(Math.random() * actions.length)];
       
       console.log(`Mosasaurus performing: ${cinematicAction}`);
     } else {
-      // Generates a new realistic direction
+
       const newDirection = new THREE.Vector3(
-        (Math.random() - 0.5) * 2, // X direction
-        (Math.random() - 0.5) * 0.6, // Y direction (less vertical movement)
-        (Math.random() - 0.5) * 2  // Z direction
+        (Math.random() - 0.5) * 2, 
+        (Math.random() - 0.5) * 0.6, 
+        (Math.random() - 0.5) * 2 
       );
       newDirection.normalize();
       
       currentDirection = newDirection;
     }
     
-    directionTimer = 8 + Math.random() * 12; // Swim in this direction for 8-20 seconds
+    directionTimer = 8 + Math.random() * 12; 
     isChangingDirection = false;
   };
 
@@ -842,16 +839,13 @@
     if (mixer) mixer.update(delta);
     if (!fish) return;
 
-    // Update direction timer
     directionTimer -= delta;
     
-    // Update cinematic timer
     if (cinematicMode) {
       cinematicTimer -= delta;
       if (cinematicTimer <= 0) {
         cinematicMode = false;
         cinematicAction = 'none';
-        // Set new direction after cinematic sequence
         const newDirection = new THREE.Vector3(
           (Math.random() - 0.5) * 2,
           (Math.random() - 0.5) * 0.6,
@@ -869,11 +863,11 @@
       const z = 0;
       target = new THREE.Vector3(x, y, z);
       aiTarget = null;
-      // Reset AI when user takes control
+
       cinematicMode = false;
       directionTimer = 8 + Math.random() * 12;
     } else {
-      // Realistic AI behavior with cinematic sequences
+
       if (directionTimer <= 0 && !isChangingDirection && !cinematicMode) {
         isChangingDirection = true;
         changeDirection();
@@ -881,7 +875,6 @@
       
       if (!aiTarget || fish.position.distanceTo(aiTarget) < 1.0 || aiTimer <= 0) {
         if (cinematicMode) {
-          // Generate cinematic targets based on action
           switch(cinematicAction) {
             case 'spiral':
               const spiralRadius = 2;
@@ -938,7 +931,6 @@
         
         aiTimer = cinematicMode ? 0.5 + Math.random() * 1 : 2 + Math.random() * 3;
         
-        // Clamp target to aquarium boundaries
         aiTarget.x = THREE.MathUtils.clamp(aiTarget.x, -aquariumWidth / 2 + 1, aquariumWidth / 2 - 1);
         aiTarget.y = THREE.MathUtils.clamp(aiTarget.y, 0.5, aquariumHeight - 0.5);
         aiTarget.z = THREE.MathUtils.clamp(aiTarget.z, -aquariumDepth / 2 + 1, aquariumDepth / 2 - 1);
@@ -951,7 +943,6 @@
     velocity.add(direction.multiplyScalar(0.03));
     velocity.multiplyScalar(0.90);
 
-    // Add buoyancy force to prevent falling
     const buoyancyForce = new THREE.Vector3(0, 0.008, 0);
     velocity.add(buoyancyForce);
 
@@ -978,7 +969,6 @@
     const tilt = -Math.atan2(velocity.y, velocity.length());
     const bank = THREE.MathUtils.clamp(-velocity.x * 0.5, -0.5, 0.5);
     
-    // Enhanced cinematic rotations
     let cinematicTilt = 0;
     let cinematicBank = 0;
     let cinematicYaw = 0;
@@ -986,7 +976,7 @@
     if (cinematicMode) {
       switch(cinematicAction) {
         case 'barrel_roll':
-          cinematicBank = Math.sin(elapsed * 2) * 1.5; // Full barrel roll
+          cinematicBank = Math.sin(elapsed * 2) * 1.5; 
           break;
           
         case 'spiral':
@@ -995,27 +985,25 @@
           break;
           
         case 'dive':
-          cinematicTilt = -0.6; // Nose down for diving
+          cinematicTilt = -0.6; 
           break;
           
         case 'surface':
-          cinematicTilt = 0.4; // Nose up for surfacing
+          cinematicTilt = 0.4; 
           break;
           
         case 'circle':
           cinematicBank = Math.sin(elapsed * 0.6) * 0.6;
-          cinematicYaw = elapsed * 0.3; // Gradual turning
+          cinematicYaw = elapsed * 0.3; 
           break;
       }
       
-      // Apply cinematic rotations more dramatically
       fish.rotation.x += ((tilt + cinematicTilt) - fish.rotation.x) * 0.08;
       fish.rotation.z += ((bank + cinematicBank) - fish.rotation.z) * 0.08;
       if (cinematicYaw !== 0) {
         fish.rotation.y += cinematicYaw * 0.02;
       }
     } else {
-      // Normal subtle rotations
       fish.rotation.x += (tilt - fish.rotation.x) * 0.04;
       fish.rotation.z += (bank - fish.rotation.z) * 0.04;
     }
