@@ -786,6 +786,13 @@
       });
     });
 
+        function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('show');
+    }
+
+    document.getElementById('codeSignature').addEventListener('click', function() {
+      this.classList.toggle('expanded');
+    });
 
     function openFishPage(fishType) {
       const card = document.querySelector(`[data-fish="${fishType}"]`);
